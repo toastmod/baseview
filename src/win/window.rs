@@ -24,7 +24,7 @@ use std::os::windows::ffi::OsStrExt;
 use std::ptr::null_mut;
 use std::rc::Rc;
 
-use raw_window_handle::{HasRawWindowHandle, RawWindowHandle, Win32Handle};
+use raw_window_handle::{HasRawWindowHandle, RawWindowHandle, Win32WindowHandle};
 
 const BV_WINDOW_MUST_CLOSE: UINT = WM_USER + 1;
 
@@ -84,12 +84,12 @@ impl WindowHandle {
 unsafe impl HasRawWindowHandle for WindowHandle {
     fn raw_window_handle(&self) -> RawWindowHandle {
         if let Some(hwnd) = self.hwnd {
-            let mut handle = Win32Handle::empty();
+            let mut handle = Win32WindowHandle::empty();
             handle.hwnd = hwnd as *mut c_void;
 
             RawWindowHandle::Win32(handle)
         } else {
-            RawWindowHandle::Win32(Win32Handle::empty())
+            RawWindowHandle::Win32(Win32WindowHandle::empty())
         }
     }
 }
@@ -757,7 +757,7 @@ impl Window<'_> {
 
 unsafe impl HasRawWindowHandle for Window<'_> {
     fn raw_window_handle(&self) -> RawWindowHandle {
-        let mut handle = Win32Handle::empty();
+        let mut handle = Win32WindowHandle::empty();
         handle.hwnd = self.state.hwnd as *mut c_void;
 
         RawWindowHandle::Win32(handle)
