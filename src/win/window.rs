@@ -26,14 +26,11 @@ use std::os::windows::ffi::OsStrExt;
 use std::ptr::null_mut;
 use std::rc::Rc;
 
-<<<<<<< HEAD
-use raw_window_handle::{HasRawWindowHandle, RawWindowHandle, Win32WindowHandle};
-=======
+
 use raw_window_handle::{
     HasRawDisplayHandle, HasRawWindowHandle, RawDisplayHandle, RawWindowHandle, Win32WindowHandle,
     WindowsDisplayHandle,
 };
->>>>>>> f0639b787bbda506434d3f6b5c91e94ca59904c6
 
 const BV_WINDOW_MUST_CLOSE: UINT = WM_USER + 1;
 
